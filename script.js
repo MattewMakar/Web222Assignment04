@@ -13,13 +13,15 @@ document.addEventListener("keydown", submit);
 
 var results = document.getElementById('results');
 
-
+//=====================================================================================
+//=====================================================================================
 function submit(event) {
   if (event.keyCode == 13)
     convert.click();
+  focusOn();
 }
-
-
+//=====================================================================================
+//=====================================================================================
 
 function convertTemp() {
   var fTemp = parseInt(f.value);
@@ -32,19 +34,14 @@ function convertTemp() {
   results.value = results.value + fTemp.toFixed(2).toString().padStart(9, " ") + '    ' + cTemp.toFixed(2).toString().padStart(9, " ") + '\r\n';
   convert.disabled = true;
   average.disabled = false;
-  negative = false;
   f.value = '';
-  f.focus();
-
+  f.setAttribute('maxlength', '4');
   if (fTemps.length == 10)
     averageTemp();
-
+  focusOn();
 }
-
-
-
-
-
+//=====================================================================================
+//=====================================================================================
 function diableButt() {
   convert.disabled = true;
   average.disabled = true;
@@ -53,62 +50,35 @@ function diableButt() {
   f.disabled = false;
   c.value = '';
   results.value = '';
-  f.focus();
+  focusOn();
 }
-
-
-
+//=====================================================================================
+//=====================================================================================
 function inputControl(event) {
   var inputChar = event.key;
   console.log(inputChar)
   var res = false;
-  if (inputChar === "Backspace" && f.value === '-') {
+  if (inputChar === "Backspace" && f.value === '-')
+  {
     f.setAttribute('maxlength', '4');
     res = true;
-  } else if (!f.value && inputChar === '-') {
+  } else if (!f.value && inputChar === '-')
+  {
     f.setAttribute('maxlength', '5');
     res = true;
-  } else if ((inputChar >= '0' && inputChar <= '9') || inputChar == "Backspace" ) {
+  } else if ((inputChar >= '0' && inputChar <= '9') || inputChar == "Backspace")
+  {
     res = true;
   } else
     res = false;
   
-  if (res && inputChar != '-' && inputChar != "Backspace") {
-    convert.disabled = false;
-    average.disabled = true;
-  } else if (inputChar == "Backspace" && f.value.length == 1) {
-    convert.disabled = true;
-  }
+  (res && inputChar != '-' && inputChar != "Backspace")&& (convert.disabled = false) && (average.disabled = true);
+  (inputChar == "Backspace" && f.value.length == 1) && (convert.disabled = true);
+  
   return res;
 }
-
-
-
-
-
-function keyControl(event) {
-  var res = false;
-  if ((e.key >= '0' && e.key <= '9') || (!f.value && e.key === "-") || e.key === "Backspace") {
-    if (f.value === '-')
-      f.setAttribute('maxlength', '5');
-    if (e.key === "Backspace" && f.value === "-")
-      f.setAttribute('maxlength', '4');
-    res= true;
-  }
-  console.log(e.key)
-  console.log(parseInt(f.value + e.key))
-  if (res && parseInt(f.value + e.key))
-    convert.disabled = false;
-  else
-
-    convert.disabled = true;
-  return res;
-}
-
-
-
-
-
+//=====================================================================================
+//=====================================================================================
 function averageTemp() {
   var cAverage = 0;
   var fAverage = 0;
@@ -131,4 +101,10 @@ function averageTemp() {
   reset.focus();
   cTemps = [];
   fTemps = [];
+}
+//=====================================================================================
+//set focus
+//=====================================================================================
+function focusOn() {
+  f.focus();
 }
