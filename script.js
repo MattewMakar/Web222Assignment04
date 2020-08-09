@@ -1,13 +1,16 @@
-var negative = false;
 var f = document.getElementById('Fahrenheit');
 var c = document.getElementById('Celsius');
-
 var fTemps = new Array;
 var cTemps = new Array;
+
 var convert = document.getElementById('convert');
 var average = document.getElementById('average');
 var reset = document.getElementById('reset');
+
+
 document.addEventListener("keydown", submit);
+
+
 var results = document.getElementById('results');
 
 
@@ -15,6 +18,7 @@ function submit(event) {
   if (event.keyCode == 13)
     convert.click();
 }
+
 
 
 function convertTemp() {
@@ -34,7 +38,13 @@ function convertTemp() {
 
   if (fTemps.length == 10)
     averageTemp();
+
 }
+
+
+
+
+
 function diableButt() {
   convert.disabled = true;
   average.disabled = true;
@@ -44,37 +54,61 @@ function diableButt() {
   c.value = '';
   results.value = '';
   f.focus();
-
-
-
 }
+
+
+
 function inputControl(event) {
-  var inputChar = event.keyCode;
+  var inputChar = event.key;
+  console.log(inputChar)
   var res = false;
-  console.log(f.value);
-  if (inputChar == 8) {
-    if (f.value == '-') {
-      negative = false;
-      f.setAttribute('maxlength', '4');
-    }
+  if (inputChar === "Backspace" && f.value === '-') {
+    f.setAttribute('maxlength', '4');
     res = true;
-  } else if (negative == false && f.value == '' && (inputChar == 189 || inputChar == 109)) {
+  } else if (!f.value && inputChar === '-') {
     f.setAttribute('maxlength', '5');
-    negative = true;
     res = true;
-  } else if (inputChar >= 48 && inputChar <= 57) {
+  } else if ((inputChar >= '0' && inputChar <= '9') || inputChar == "Backspace" ) {
     res = true;
   } else
     res = false;
-  console.log(f.value);
-  if (res && inputChar != 189 && inputChar != 109 && inputChar != 8) {
+  
+  if (res && inputChar != '-' && inputChar != "Backspace") {
     convert.disabled = false;
     average.disabled = true;
-  } else if (inputChar == 8 && f.value.length == 1) {
+  } else if (inputChar == "Backspace" && f.value.length == 1) {
     convert.disabled = true;
   }
   return res;
 }
+
+
+
+
+
+function keyControl(event) {
+  var res = false;
+  if ((e.key >= '0' && e.key <= '9') || (!f.value && e.key === "-") || e.key === "Backspace") {
+    if (f.value === '-')
+      f.setAttribute('maxlength', '5');
+    if (e.key === "Backspace" && f.value === "-")
+      f.setAttribute('maxlength', '4');
+    res= true;
+  }
+  console.log(e.key)
+  console.log(parseInt(f.value + e.key))
+  if (res && parseInt(f.value + e.key))
+    convert.disabled = false;
+  else
+
+    convert.disabled = true;
+  return res;
+}
+
+
+
+
+
 function averageTemp() {
   var cAverage = 0;
   var fAverage = 0;
@@ -86,7 +120,7 @@ function averageTemp() {
   fAverage /= cTemps.length;
   fAverage = Math.floor((fAverage * 100) + .5) / 100;
   cAverage = Math.floor((cAverage * 100) + .5) / 100;
-  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(9,' ') + '    ' + cAverage.toFixed(2).toString().padStart(9," ") + '\r\n';
+  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(9, ' ') + '    ' + cAverage.toFixed(2).toString().padStart(9, " ") + '\r\n';
   average.disabled = true;
   convert.disabled = true;
   f.value = '';
