@@ -1,0 +1,57 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-image: url(./Images/background.jpg);
+  background-repeat: no-repeat;
+  font-family: monospace;
+  background-size: cover  ;
+}
+h1{
+  text-align: center;
+  font-size: 30px;
+  color: rgb(24, 78, 99);
+}
+form{
+  border: 3px solid black;
+  border-radius: 30px;
+  text-align: center;
+  margin: auto;
+  width: 41vw;
+  height: 80vh;
+  background-color:  rgba(24, 78, 99, 0.774);
+}
+label{
+  float: left;
+  color: aliceblue;
+  font-size: 23px;
+  margin: 10px 10%;
+  
+}
+input{
+  float: right;
+  margin: 10px 10%;
+  height: 3vh;
+  text-align: right;
+
+}
+br{
+  clear: both;
+} 
+textarea{
+  height: 50vh;
+  width: 40vw;
+  font-family:  'Courier New', Courier;
+  font-size: 20px;
+  text-align: center;
+  resize: none;
+}
+button{
+  float: left;
+  margin: 10px 15px;
+  font-size: 20px;
+}
+#resultLabel
+{
+  float: none;
+  margin: 10px auto;
+}
