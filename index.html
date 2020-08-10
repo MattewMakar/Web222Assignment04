@@ -10,7 +10,7 @@
   <title>Temperature Conversion</title>
 </head>
 
-<body onload="diableButt()">
+<body onload="diableButton()">
   <h1>Temperature Conversion by Mattew Makar</h1>
   <form action="#results">
     <label for="Fahrenheit">Fahrenheit</label>
@@ -19,12 +19,12 @@
     <label for="Celsius">Celsius</label>
     <input readonly type="text" id="Celsius" /> <br /><br />
     <label for="results" id="resultLabel">Fahrenheit &nbsp;&nbsp;Celsius</label> <br />
-    <textarea readonly name="" id="results" cols="30" rows="10"></textarea> <br />
-    <button type="submit" accesskey="alt+c" id="convert" onclick="convertTemp()"><u>C</u>onvert</button>
-    <button type="submit" accesskey="alt+a" id="average" onclick="averageTemp()"><u>A</u>verage</button>
-    <button type="reset" accesskey="alt+r" onclick="diableButt()" id="reset"><u>R</u>eset</button>
+    <textarea readonly name="results" id="results" cols="30" rows="10"></textarea> <br />
+    <button type="submit" accesskey="c" id="convert" onclick="convertTemp()"><u>C</u>onvert</button>
+    <button type="submit" accesskey="a" id="average" onclick="averageTemp()"><u>A</u>verage</button>
+    <button type="reset" accesskey="r" onclick="diableButton()" id="reset"><u>R</u>eset</button>
   </form>
+  <script src="./script.js"></script>
 </body>
-<script src="./script.js"></script>
 
 </html>

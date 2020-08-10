@@ -14,13 +14,14 @@ document.addEventListener("keydown", submit);
 var results = document.getElementById('results');
 
 //=====================================================================================
+//Enter key
 //=====================================================================================
 function submit(event) {
   if (event.keyCode == 13)
     convert.click();
-  focusOn();
 }
 //=====================================================================================
+//Covert function
 //=====================================================================================
 
 function convertTemp() {
@@ -36,13 +37,14 @@ function convertTemp() {
   average.disabled = false;
   f.value = '';
   f.setAttribute('maxlength', '4');
+  f.focus()
   if (fTemps.length == 10)
     averageTemp();
-  focusOn();
 }
 //=====================================================================================
+//disable all
 //=====================================================================================
-function diableButt() {
+function diableButton() {
   convert.disabled = true;
   average.disabled = true;
   reset.setAttribute('style', 'visibility: hidden;');
@@ -50,7 +52,7 @@ function diableButt() {
   f.disabled = false;
   c.value = '';
   results.value = '';
-  focusOn();
+  f.focus();
 }
 //=====================================================================================
 //=====================================================================================
@@ -58,26 +60,24 @@ function inputControl(event) {
   var inputChar = event.key;
   console.log(inputChar)
   var res = false;
-  if (inputChar === "Backspace" && f.value === '-')
-  {
+  if (inputChar === "Backspace" && f.value === '-') {
     f.setAttribute('maxlength', '4');
     res = true;
-  } else if (!f.value && inputChar === '-')
-  {
+  } else if (!f.value && inputChar === '-') {
     f.setAttribute('maxlength', '5');
     res = true;
-  } else if ((inputChar >= '0' && inputChar <= '9') || inputChar == "Backspace")
-  {
+  } else if ((inputChar >= '0' && inputChar <= '9') || inputChar == "Backspace") {
     res = true;
   } else
     res = false;
-  
-  (res && inputChar != '-' && inputChar != "Backspace")&& (convert.disabled = false) && (average.disabled = true);
+
+  (res && inputChar != '-' && inputChar != "Backspace") && (convert.disabled = false) && (average.disabled = true);
   (inputChar == "Backspace" && f.value.length == 1) && (convert.disabled = true);
-  
+
   return res;
 }
 //=====================================================================================
+//average function
 //=====================================================================================
 function averageTemp() {
   var cAverage = 0;
@@ -101,10 +101,4 @@ function averageTemp() {
   reset.focus();
   cTemps = [];
   fTemps = [];
-}
-//=====================================================================================
-//set focus
-//=====================================================================================
-function focusOn() {
-  f.focus();
 }
