@@ -1,5 +1,7 @@
 var f = document.getElementById('Fahrenheit');
 var c = document.getElementById('Celsius');
+var results = document.getElementById('results');
+
 var fTemps = new Array;
 var cTemps = new Array;
 
@@ -10,11 +12,8 @@ var reset = document.getElementById('reset');
 
 document.addEventListener("keydown", submit);
 
-
-var results = document.getElementById('results');
-
 //=====================================================================================
-//Enter key
+//the enter key control 
 //=====================================================================================
 function submit(event) {
   if (event.keyCode == 13)
@@ -30,8 +29,7 @@ function convertTemp() {
   var cTemp = (fTemp - 32) * 5 / 9;
   cTemp = Math.floor((cTemp * 100) + .5) / 100;
   cTemps.push(cTemp);
-  var cBox = document.getElementById('Celsius');
-  cBox.value = cTemp;
+  c.value = cTemp;
   results.value = results.value + fTemp.toFixed(2).toString().padStart(9, " ") + '    ' + cTemp.toFixed(2).toString().padStart(9, " ") + '\r\n';
   convert.disabled = true;
   average.disabled = false;
@@ -55,6 +53,7 @@ function diableButton() {
   f.focus();
 }
 //=====================================================================================
+//only degits and negative sign and rset the size on back space
 //=====================================================================================
 function inputControl(event) {
   var inputChar = event.key;
@@ -76,6 +75,8 @@ function inputControl(event) {
 
   return res;
 }
+
+
 //=====================================================================================
 //average function
 //=====================================================================================
@@ -90,15 +91,14 @@ function averageTemp() {
   fAverage /= cTemps.length;
   fAverage = Math.floor((fAverage * 100) + .5) / 100;
   cAverage = Math.floor((cAverage * 100) + .5) / 100;
-  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(9, ' ') + '    ' + cAverage.toFixed(2).toString().padStart(9, " ") + '\r\n';
+  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(9, ' ') + '    ' + cAverage.toFixed(2).toString().padStart(9, ' ') + '\r\n';
+  f.value = '';
+  c.value = '';
   average.disabled = true;
   convert.disabled = true;
-  f.value = '';
-  var cBox = document.getElementById('Celsius');
-  cBox.value = '';
   f.disabled = true;
-  reset.setAttribute('style', 'visibility: visible;');
-  reset.focus();
   cTemps = [];
   fTemps = [];
+  reset.setAttribute('style', 'visibility: visible;');
+  reset.focus();
 }
