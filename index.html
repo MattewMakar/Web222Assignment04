@@ -12,7 +12,7 @@
 
 <body onload="diableButton()">
   <h1>Temperature Conversion by Mattew Makar</h1>
-  <form action="#results">
+  <form action="#results" onsubmit="preventDefault(event)" >
     <label for="Fahrenheit">Fahrenheit</label>
     <input type="text" autocomplete="off" id="Fahrenheit" maxlength="4" onkeydown="return inputControl(event)"
       onkeyup="buttonControl();" onpaste="return false;" /> <br /><br />
