@@ -18,4 +18,4 @@ using :
 
 ## URL link
 
-https://mattewmakar.github.io/Store-Assignment04/ Note: the reposatory is private
+https://mattewmakar.github.io/Web222Assignment04/ Note: the reposatory is private
