@@ -9,7 +9,9 @@ var convert = document.getElementById('convert');
 var average = document.getElementById('average');
 var reset = document.getElementById('reset');
 
-
+//=====================================================================================
+//the enter key control 
+//=====================================================================================
 document.addEventListener("keydown", submit);
 
 //=====================================================================================
@@ -19,6 +21,8 @@ function submit(event) {
   if (event.keyCode == 13)
     convert.click();
 }
+
+
 //=====================================================================================
 //Covert function
 //=====================================================================================
@@ -30,7 +34,7 @@ function convertTemp() {
   cTemp = Math.floor((cTemp * 100) + .5) / 100;
   cTemps.push(cTemp);
   c.value = cTemp;
-  results.value = results.value + fTemp.toFixed(2).toString().padStart(9, " ") + '    ' + cTemp.toFixed(2).toString().padStart(9, " ") + '\r\n';
+  results.value += fTemp.toString().padStart(7, " ") + '    ' + cTemp.toFixed(2).toString().padStart(9, " ") + '\r\n';
   convert.disabled = true;
   average.disabled = false;
   f.value = '';
@@ -53,11 +57,10 @@ function diableButton() {
   f.focus();
 }
 //=====================================================================================
-//only degits and negative sign and rset the size on back space
+//only degits and negative sign and reset the size on back space
 //=====================================================================================
 function inputControl(event) {
   var inputChar = event.key;
-  console.log(inputChar)
   var res = false;
   if (inputChar === "Backspace" && f.value === '-') {
     f.setAttribute('maxlength', '4');
@@ -69,14 +72,25 @@ function inputControl(event) {
     res = true;
   } else
     res = false;
-
-  (res && inputChar != '-' && inputChar != "Backspace") && (convert.disabled = false) && (average.disabled = true);
-  (inputChar == "Backspace" && f.value.length == 1) && (convert.disabled = true);
-
   return res;
 }
+//=====================================================================================
+//button control for the average and convert
+//=====================================================================================
+function buttonControl() {
+  if (!isNaN(parseInt(f.value)))
+    convert.disabled = false;
+  else
+    convert.disabled = true;
 
 
+  if (convert.disabled && !f.value && cTemps.length)
+    average.disabled = false;
+  else
+    average.disabled = true;
+
+
+}
 //=====================================================================================
 //average function
 //=====================================================================================
@@ -91,7 +105,7 @@ function averageTemp() {
   fAverage /= cTemps.length;
   fAverage = Math.floor((fAverage * 100) + .5) / 100;
   cAverage = Math.floor((cAverage * 100) + .5) / 100;
-  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(9, ' ') + '    ' + cAverage.toFixed(2).toString().padStart(9, ' ') + '\r\n';
+  results.value = results.value + '============================================\r\n' + fAverage.toFixed(2).toString().padStart(7, ' ') + '    ' + cAverage.toFixed(2).toString().padStart(9, ' ') + '\r\n';
   f.value = '';
   c.value = '';
   average.disabled = true;
